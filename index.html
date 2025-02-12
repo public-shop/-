@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สำนักป้ายยา</title>
+    <link rel="icon" href="path/to/your/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="profile-container">
+        <div class="cover-image">
+            <img src="Image/profilebackground.jpg" alt="Cover Image">
+            <div class="profile-img-wrapper">
+                <img class="profile-img" src="Image/profile.png" alt="Profile Image">
+            </div>
+        </div>
+
+        <h1>สำนักป้ายยา</h1>
+        <p class="bio">รวบรวมของที่น่าสนใจให้กับคุณ</p>
+        <p class="bio">สุดยอดไอเท็มที่ไม่ควรพลาด</p>
+
+        <div class="social-links">
+            <a href="https://www.instagram.com/public_s_h_o_p?igsh=MXI0aW5sMjZnd2UzaA==" target="_blank" class="instagram">
+                <i class="fab fa-instagram"></i> IG
+            </a>
+            <a href="https://s.lemon8-app.com/al/GgZjpjvFxp" target="_blank" class="lemon8">
+                <i class="fas fa-lemon"></i> Lemon8
+            </a>
+            <a href="https://www.threads.net/@public_s_h_o_p" target="_blank" class="threads">
+                <i class="fab fa-threads"></i> Threads
+            </a>
+            <a href="https://youtube.com/@public_s_h_o_p?si=bFPcscBQp7o-jrDU" target="_blank" class="youtube">
+                <i class="fab fa-youtube"></i> YouTube
+            </a>
+            <a href="https://www.facebook.com/share/1DUayMV4mi/" target="_blank" class="facebook">
+                <i class="fab fa-facebook-f"></i> Facebook
+            </a>
+        </div>
+
+        <div class="search-box">
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="กรุณากรอกรหัสสินค้า...">
+                <button onclick="searchProducts()">ค้นหา</button>
+            </div>
+        </div>
+
+        <h1>สินค้าทั้งหมด</h1>
+        <div class="products" id="product-container">
+            </div>
+    </div>
+
+    <script>
+        let allProducts = [];
+
+        async function fetchProducts() {
+            try {
+                const response = await fetch('https://public-shop.github.io/-/database/database.json');
+                allProducts = await response.json();
+                displayProducts(allProducts);
+            } catch (error) {
+                console.error('เกิดข้อผิดพลาดในการดึงข้อมูลสินค้า:', error);
+            }
+        }
+
+        function displayProducts(products) {
+            const productContainer = document.getElementById('product-container');
+            productContainer.innerHTML = '';
+
+            products.forEach(product => {
+                const productItem = document.createElement('div');
+                productItem.classList.add('product-item');
+                productItem.innerHTML = `
+                    <i class="fab fa-shopify"></i>
+                    <p class="product-name">${product.name}</p>
+                `;
+
+                productItem.addEventListener('click', () => {
+                    window.open(product.linkshopee, 'test3.html');
+                });
+
+                productContainer.appendChild(productItem);
+            });
+        }
+
+        function searchProducts() {
+            let searchInput = document.getElementById('search-input').value;
+
+            if (searchInput.startsWith(" ") || searchInput.endsWith(" ")) {
+                alert("กรุณากรอกโดยไม่มีช่องว่าง");
+                return;
+            }
+
+            searchInput = searchInput.trim().toLowerCase();
+
+            if (searchInput.includes(" ")) {
+                alert("กรุณากรอกโดยไม่มีช่องว่าง");
+                return;
+            }
+
+            const filteredProducts = allProducts.filter(product =>
+                product.name.toLowerCase().includes(searchInput)
+            );
+
+            if (filteredProducts.length === 0) {
+                alert("ไม่พบสินค้าที่ตรงกับรหัสที่คุณกรอก");
+            }
+
+            displayProducts(filteredProducts);
+        }
+
+        window.addEventListener('load', fetchProducts);
+
+        function resizeCoverImage() {
+            let cover = document.querySelector(".cover-image");
+            let viewportHeight = window.innerHeight * 0.3;
+            cover.style.height = viewportHeight + "px";
+        }
+
+        window.addEventListener("load", resizeCoverImage);
+        window.addEventListener("resize", resizeCoverImage);
+    </script>
+
+</body>
+</html>
