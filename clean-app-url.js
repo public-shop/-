@@ -10,15 +10,13 @@
         }
     });
 
-    // ถ้ามีการลบพารามิเตอร์ออก ให้เปลี่ยน URL และรันฟังก์ชันปรับขนาดภาพใหม่
+    // ถ้ามีการลบพารามิเตอร์ออก ให้เปลี่ยน URL และโหลดใหม่
     if (hasRemoved) {
         window.history.replaceState({}, document.title, url.pathname + url.search);
 
-        // รอให้ URL เปลี่ยนแปลงก่อนแล้วค่อยปรับขนาดภาพใหม่
+        // ใช้วิธี reload หน้าใหม่แบบไม่โหลดแคช
         setTimeout(() => {
-            if (typeof resizeCoverImage === "function") {
-                resizeCoverImage();
-            }
-        }, 100); // รอ 100 มิลลิวินาที
+            location.reload();
+        }, 50);
     }
 })();
