@@ -8,7 +8,10 @@ function resetWebsite() {
     localStorage.clear();   // ล้าง localStorage
     sessionStorage.clear(); // ล้าง sessionStorage
 
-    console.log("เว็บไซต์ถูกเคลียร์ข้อมูลเรียบร้อย!"); // แสดงใน Console
+    // 3. เปลี่ยน URL ของหน้าเพื่อไม่ให้มันเก็บประวัติการเข้าชม
+    history.replaceState(null, '', window.location.href);
+
+    console.log("เว็บไซต์ถูกเคลียร์ข้อมูลเรียบร้อย!");
 }
 
 // ทำงานอัตโนมัติหลังจากโหลดเว็บเสร็จ 10 วินาที
