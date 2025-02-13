@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สำนักป้ายยา</title>
+<link rel="icon" href="Image/profile.png" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="x-ui.js"></script
+</head>
+<body>
+<div class="profile-container">
+    <div class="cover-image">
+        <img src="Image/profilebackground.jpg" alt="Image profilebackground Image" loading="lazy">
+        <div class="profile-img-wrapper">
+            <img class="profile-img" src="Image/profile.png" alt="profile Image" loading="lazy">
+        </div>
+    </div>
+
+    <h1>สำนักป้ายยา</h1>
+    <p class="bio">รวบรวมของที่น่าสนใจให้กับคุณ</p>
+    <p class="bio">สุดยอดไอเท็มที่ไม่ควรพลาด</p>
+
+    <div class="social-links">
+        <a href="https://www.instagram.com/public_s_h_o_p?igsh=MXI0aW5sMjZnd2UzaA==" target="_blank" class="instagram" aria-label="Instagram">
+            <i class="fab fa-instagram"></i> IG
+        </a>
+        <a href="https://s.lemon8-app.com/al/GgZjpjvFxp" target="_blank" class="lemon8" aria-label="Lemon8">
+            <i class="fas fa-lemon"></i> Lemon8
+        </a>
+        <a href="https://www.threads.net/@public_s_h_o_p" target="_blank" class="threads" aria-label="Threads">
+            <i class="fab fa-threads"></i> Threads
+        </a>
+        <a href="https://youtube.com/@public_s_h_o_p?si=bFPcscBQp7o-jrDU" target="_blank" class="youtube" aria-label="YouTube">
+            <i class="fab fa-youtube"></i> YouTube
+        </a>
+        <a href="https://www.facebook.com/share/1DUayMV4mi/" target="_blank" class="facebook" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i> Facebook
+        </a>
+    </div>
+
+    <div class="search-box">
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="กรุณากรอกรหัสสินค้า...">
+            <button onclick="searchProducts()">ค้นหา</button>
+        </div>
+    </div>
+
+    <h1>สินค้าทั้งหมด</h1>
+    <div class="products" id="product-container"></div>
+</div>
+<script src="system.js"></script>
+</body>
+</html>
