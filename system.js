@@ -1,4 +1,5 @@
-let allProducts = [];
+
+    let allProducts = [];
 
     // ฟังก์ชันถอดรหัส Base64
     function decodeBase64(encodedString) {
@@ -7,7 +8,7 @@ let allProducts = [];
 
     async function fetchProducts() {
         try {
-            const encodedUrl = 'aHR0cHM6Ly9wdWJsaWMtc2hvcC5naXRodWIuaW8vZGF0YWJhc2UvZGF0YWJhc2UucGhw';
+            const encodedUrl = 'aHR0cHM6Ly9wdWJsaWMtc2hvcC5naXRodWIuaW8vZGF0YWJhc2UvZGF0YWJhc2UuanNvbg==';
             const apiUrl = decodeBase64(encodedUrl);
             const response = await fetch(apiUrl);
             if (!response.ok) {
@@ -79,14 +80,8 @@ let allProducts = [];
         }
     }
 
-    // WebSocket สำหรับอัปเดตข้อมูลแบบเรียลไทม์
-    const socket = new WebSocket('wss://your-websocket-url');
-
-    socket.onmessage = function(event) {
-        const newProducts = JSON.parse(event.data);
-        allProducts = newProducts;
-        displayProducts(allProducts);
-    };
+    // ดึงข้อมูลสินค้าใหม่ทุก 1 นาที (60000 มิลลิวินาที)
+    setInterval(fetchProducts, 60000);
 
     window.addEventListener('load', fetchProducts);
 
