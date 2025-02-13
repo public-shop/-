@@ -14,7 +14,7 @@ let allProducts = [];
                 throw new Error('Network response was not ok');
             }
             allProducts = await response.json();
-            displayProducts(allProducts); // แสดงสินค้าทั้งหมด
+            displayProducts(allProducts);
         } catch (error) {
             console.error('เกิดข้อผิดพลาดในการดึงข้อมูลสินค้า:', error);
             alert('ไม่สามารถดึงข้อมูลสินค้าได้ กรุณาลองใหม่ในภายหลัง');
@@ -23,31 +23,25 @@ let allProducts = [];
 
     function displayProducts(products) {
         const productContainer = document.getElementById('product-container');
-        productContainer.innerHTML = ''; // เคลียร์ข้อมูลเก่าก่อน
+        productContainer.innerHTML = ''; // ล้างข้อมูลเก่าออกก่อน
 
-        if (products.length === 0) {
-            const noProductsMessage = document.createElement('p');
-            noProductsMessage.textContent = 'ไม่มีสินค้าพร้อมจำหน่ายในขณะนี้';
-            productContainer.appendChild(noProductsMessage);
-        } else {
-            products.forEach(product => {
-                const productItem = document.createElement('div');
-                productItem.classList.add('product-item');
-                productItem.innerHTML = `
-                    <i class="fab fa-shopify"></i>
-                    <p class="product-name">${product.name}</p>
-                `;
+        products.forEach(product => {
+            const productItem = document.createElement('div');
+            productItem.classList.add('product-item');
+            productItem.innerHTML = `
+                <i class="fab fa-shopify"></i>
+                <p class="product-name">${product.name}</p>
+            `;
 
-                productItem.addEventListener('click', () => {
-                    window.location.href = product.linkshopee; // เปิดลิงก์ในแท็บเดิม
-                });
-
-                productContainer.appendChild(productItem);
+            productItem.addEventListener('click', () => {
+                window.location.href = product.linkshopee; // เปิดลิงก์ในแท็บเดิม
             });
-        }
+
+            productContainer.appendChild(productItem);
+        });
     }
 
-    // ระบบเช็คแจ้งเตือนตรวจสอบการค้นหา
+    // ฟังก์ชันเช็คแจ้งเตือน
     function searchProducts() {
         let searchInput = document.getElementById('search-input').value;
 
@@ -81,12 +75,14 @@ let allProducts = [];
         if (filteredProducts.length === 0) {
             alert("ไม่พบสินค้าที่ตรงกับรหัสที่คุณกรอก");
         } else {
-            displayProducts(filteredProducts);  // แสดงผลลัพธ์ที่ค้นพบ
+            displayProducts(filteredProducts);  // แสดงผลลัพธ์
         }
     }
 
+    // ดึงข้อมูลสินค้าเมื่อโหลดหน้า
     window.addEventListener('load', fetchProducts);
 
+    // ระบบ Resize ขนาดภาพ Cover
     function resizeCoverImage() {
         let cover = document.querySelector(".cover-image");
         let viewportHeight = window.innerHeight * 0.3;
