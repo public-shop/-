@@ -23,7 +23,7 @@ let allProducts = [];
 
     function displayProducts(products) {
         const productContainer = document.getElementById('product-container');
-        productContainer.innerHTML = ''; // ล้างข้อมูลเก่าออกก่อน
+        productContainer.innerHTML = '';
 
         products.forEach(product => {
             const productItem = document.createElement('div');
@@ -34,55 +34,53 @@ let allProducts = [];
             `;
 
             productItem.addEventListener('click', () => {
-                window.location.href = product.linkshopee; // เปิดลิงก์ในแท็บเดิม
-            });
+window.location.href = product.linkshopee; // เปิดลิงก์ในแท็บเดิม
+});
 
             productContainer.appendChild(productItem);
         });
     }
 
-    // ฟังก์ชันเช็คแจ้งเตือน
+//ระบบเช็คแจ้งเตือนตรวจสอบ
     function searchProducts() {
-        let searchInput = document.getElementById('search-input').value;
+let searchInput = document.getElementById('search-input').value;
 
-        // เช็กกรณีที่ไม่มีการกรอกข้อความ
-        if (searchInput === "") {
-            alert("กรุณากรอกรหัสสินค้า");
-            return;
-        }
+// เช็กกรณีที่ไม่มีการกรอกข้อความ
+if (searchInput === "") {
+    alert("กรุณากรอกรหัสสินค้า");
+    return;
+}
 
-        // เช็กว่ามีช่องว่างที่หน้าแรกหรือหลัง
-        if (searchInput.startsWith(" ") || searchInput.endsWith(" ")) {
-            alert("กรุณากรอกโดยไม่มีช่องว่าง");
-            return;
-        }
+// เช็กว่ามีช่องว่างที่หน้าแรกหรือหลัง
+if (searchInput.startsWith(" ") || searchInput.endsWith(" ")) {
+    alert("กรุณากรอกโดยไม่มีช่องว่าง");
+    return;
+}
 
-        // ตัดช่องว่างและแปลงเป็นตัวพิมพ์เล็ก
-        searchInput = searchInput.trim().toLowerCase();
+// ตัดช่องว่างและแปลงเป็นตัวพิมพ์เล็ก
+searchInput = searchInput.trim().toLowerCase();
 
-        // เช็กว่ามีช่องว่างระหว่างคำ
-        if (searchInput.includes(" ")) {
-            alert("กรุณากรอกโดยไม่มีช่องว่าง");
-            return;
-        }
+// เช็กว่ามีช่องว่างระหว่างคำ
+if (searchInput.includes(" ")) {
+    alert("กรุณากรอกโดยไม่มีช่องว่าง");
+    return;
+}
 
-        // กรองสินค้าที่ตรงกับคำที่กรอก
-        const filteredProducts = allProducts.filter(product =>
-            product.name.toLowerCase().includes(searchInput)
-        );
+// กรองสินค้าที่ตรงกับคำที่กรอก
+const filteredProducts = allProducts.filter(product =>
+    product.name.toLowerCase().includes(searchInput)
+);
 
-        // ถ้าไม่พบสินค้าแสดงข้อความ
-        if (filteredProducts.length === 0) {
-            alert("ไม่พบสินค้าที่ตรงกับรหัสที่คุณกรอก");
-        } else {
-            displayProducts(filteredProducts);  // แสดงผลลัพธ์
-        }
-    }
+// ถ้าไม่พบสินค้าแสดงข้อความ
+if (filteredProducts.length === 0) {
+    alert("ไม่พบสินค้าที่ตรงกับรหัสที่คุณกรอก");
+} else {
+    displayProducts(filteredProducts);  // แสดงผลลัพธ์
+}
+}
 
-    // ดึงข้อมูลสินค้าเมื่อโหลดหน้า
-    window.addEventListener('load', fetchProducts);
+window.addEventListener('load', fetchProducts);
 
-    // ระบบ Resize ขนาดภาพ Cover
     function resizeCoverImage() {
         let cover = document.querySelector(".cover-image");
         let viewportHeight = window.innerHeight * 0.3;
