@@ -1,5 +1,4 @@
-<script>
-    let allProducts = [];
+let allProducts = [];
 
     // ฟังก์ชันถอดรหัส Base64
     function decodeBase64(encodedString) {
@@ -96,4 +95,3 @@
 
     window.addEventListener("load", resizeCoverImage);
     window.addEventListener("resize", resizeCoverImage);
-</script>
