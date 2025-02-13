@@ -10,13 +10,14 @@
         }
     });
 
-    // ถ้ามีการลบพารามิเตอร์ออก ให้เปลี่ยน URL โดยไม่รีเฟรช
+    // ถ้ามีการลบพารามิเตอร์ออก
     if (hasRemoved) {
-        // ตรวจสอบว่า URL ถูกต้องหรือไม่
-        if (!url.href.includes('public-shop.github.io')) {
-            // ถ้าไม่ใช่ URL ที่ต้องการ (เช่น https://public-shop.github.io/dashboard/) ให้เปลี่ยนเส้นทาง
+        // ตรวจสอบว่า URL ไม่ใช่ https://public-shop.github.io/dashboard/
+        if (url.href !== "https://public-shop.github.io/dashboard/") {
+            // ถ้าไม่ใช่ URL ที่ต้องการ ให้เปลี่ยนเส้นทาง
             window.location.href = "https://public-shop.github.io/dashboard/";
         } else {
+            // ถ้าเป็น URL ที่ต้องการ ให้เปลี่ยน URL โดยไม่รีเฟรช
             window.history.replaceState({}, document.title, url.pathname + url.search);
         }
     }
