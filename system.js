@@ -7,7 +7,7 @@ let allProducts = [];
 
     async function fetchProducts() {
         try {
-            const encodedUrl = 'aHR0cHM6Ly9wdWJsaWMtc2hvcC5naXRodWIuaW8vZGF0YWJhc2UvZGF0YWJhc2UuanNvbg==';
+            const encodedUrl = 'aHR0cHM6Ly9naXRodWIuY29tL3B1YmxpYy1zaG9wL2RhdGFiYXNlL3Jhdy9yZWZzL2hlYWRzL21haW4vZGF0YWJhc2UucGhw';
             const apiUrl = decodeBase64(encodedUrl);
             const response = await fetch(apiUrl);
             if (!response.ok) {
