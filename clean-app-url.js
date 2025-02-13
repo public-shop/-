@@ -10,16 +10,9 @@
         }
     });
 
-    // ถ้ามีการลบพารามิเตอร์ออก ให้เปลี่ยน URL โดยไม่รีเฟรช
+    // ถ้ามีการลบพารามิเตอร์ออก ให้เชื่อมต่อไปยังลิงก์จริง (URL ใหม่)
     if (hasRemoved) {
-        window.history.replaceState({}, document.title, url.pathname + url.search);
-
-        // รอให้ URL เปลี่ยนก่อนแล้วค่อยปรับขนาดภาพใหม่
-        setTimeout(() => {
-            // ตรวจสอบให้แน่ใจว่า resizeCoverImage() พร้อมใช้งาน
-            if (typeof resizeCoverImage === "function") {
-                resizeCoverImage();  // ปรับขนาดภาพ
-            }
-        }, 100); // รอ 100 มิลลิวินาที
+        // ไปยัง URL ใหม่โดยไม่มีพารามิเตอร์
+        window.location.href = url.toString();
     }
 })();
